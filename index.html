@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8" />
+  <title>منيو المطعم</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <h1>قائمة الطعام</h1>
+  <div id="menu-container"></div>
+
+  <script>
+    fetch('/api/menu')
+      .then(res => res.json())
+      .then(data => {
+        const container = document.getElementById('menu-container');
+        data.forEach(item => {
+          const div = document.createElement('div');
+          div.className = 'menu-item';
+          div.innerHTML = `<h3>${item.name}</h3><p>${item.description}</p><strong>${item.price} جنيه</strong>`;
+          container.appendChild(div);
+        });
+      });
+  </script>
+</body>
+</html>

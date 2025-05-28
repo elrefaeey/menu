@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8" />
+  <title>تسجيل الدخول</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <h2>تسجيل دخول الإدمن</h2>
+  <form id="login-form">
+    <input type="text" id="username" placeholder="اسم المستخدم" required />
+    <input type="password" id="password" placeholder="كلمة السر" required />
+    <button type="submit">دخول</button>
+  </form>
+
+  <script>
+    document.getElementById('login-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+
+      const res = await fetch('/api/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password })
+      });
+
+      if (res.ok) {
+        window.location.href = 'admin.html';
+      } else {
+        alert('بيانات الدخول خاطئة');
+      }
+    });
+  </script>
+</body>
+</html>
